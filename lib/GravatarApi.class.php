@@ -32,12 +32,23 @@ class GravatarApi
 
   public function __construct($image_size = null, $rating = null)
   {
-    $this->cache_dir_name = DIRECTORY_SEPARATOR.sfConfig::get('sf_upload_dir_name').DIRECTORY_SEPARATOR .
-                            sfConfig::get('app_gravatar_cache_dir_name', 'g_cache').DIRECTORY_SEPARATOR;
 
-    $this->cache_dir     = sfConfig::get('sf_web_dir').$this->cache_dir_name;
+    if (SYMFONY_VERSION >= 1.1)
+    {
+      $this->cache_dir = sfConfig::get('sf_upload_dir').DIRECTORY_SEPARATOR
+                         .sfConfig::get('app_gravatar_cache_dir_name', 'g_cache').DIRECTORY_SEPARATOR;
+      $this->cache_dir_name = str_replace(sfConfig::get('sf_web_dir'), '', $this->cache_dir);
+    }
+    else
+    {
+      $this->cache_dir_name = DIRECTORY_SEPARATOR.sfConfig::get('sf_upload_dir_name').DIRECTORY_SEPARATOR
+                              .sfConfig::get('app_gravatar_cache_dir_name', 'g_cache').DIRECTORY_SEPARATOR;
+
+      $this->cache_dir = sfConfig::get('sf_web_dir').$this->cache_dir_name;
+    }
+
     $this->default_image = sfConfig::get('app_gravatar_default_image', 'gravatar_default.png');
-    $this->expire_ago    = sfConfig::get('app_gravatar_cache_expiration', '3 days');
+    $this->expire_ago = sfConfig::get('app_gravatar_cache_expiration', '3 days');
 
     if (is_null($image_size) || $image_size > 80 || $image_size < 1)
     {
@@ -159,6 +170,6 @@ class GravatarApi
       fwrite($new_file, $gravatar_img);
     }
 
-    return $this->cache_dir_name.$to_return;
+    return str_replace(DIRECTORY_SEPARATOR, '/', $this->cache_dir_name).$to_return;
   }
 }

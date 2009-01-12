@@ -43,6 +43,7 @@ You can set some default option that are common for all of your gravatar in your
             cache_dir_name: g_cache
             cache_expiration: 3 days # refer to strtotime() php function for more infos, but you can write 1 week, 1 year, whatever you want
 
+The gravatars will be saved in cache under Symfony's upload dir, according to the setting of your Symfony's setup.
 
 ## License
 
@@ -57,6 +58,11 @@ The plugin is being developed by Mickael Kurmann (mickael.kurmann <<at>> gmail.c
   * add unit tests
 
 ## Changelog
+
+### version 0.9 - 2009-01-12:
+
+ * fixed bug under windows with backslashed paths
+ * added compatibility with Symfony 1.1 and 1.2 (Xavier)
 
 ### version 0.8 - 2008-08-10:
 
