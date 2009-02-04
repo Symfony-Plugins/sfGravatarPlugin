@@ -9,6 +9,10 @@ Lets you easily use Gravatar from [http://site.gravatar.com](http://site.gravata
 
 ## Installation
 
+### Step 0
+
+Check if you've [curl](http://www.php.net/curl) installed. You need it
+
 ### Step 1
 
         symfony plugin-install http://plugins.symfony-project.com/sfGravatarPlugin
