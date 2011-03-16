@@ -15,7 +15,7 @@ function gravatar_image_tag($email, $gravatar_rating = null, $gravatar_size = nu
   // return the gravatar image
 
   return image_tag($gravatar->getGravatar($email),
-                   array('alt' => $alt_text,
+                   array('alt_title' => $alt_text,
                          'width' => sfConfig::get('app_gravatar_default_size', 80),
                          'height' => sfConfig::get('app_gravatar_default_size', 80),
                          'class' => 'gravatar_photo'

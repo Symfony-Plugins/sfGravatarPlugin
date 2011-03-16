@@ -47,6 +47,12 @@ class GravatarApi
       $this->cache_dir = sfConfig::get('sf_web_dir').$this->cache_dir_name;
     }
 
+    //ensure cache dir exists
+    if(!file_exists($this->cache_dir) && !mkdir($this->cache_dir))
+    {
+      throw new sfException(sprintf("Could not create Gravatar cache directory (%s)", $this->cache_dir));
+    }
+
     $this->default_image = sfConfig::get('app_gravatar_default_image', 'gravatar_default.png');
     $this->expire_ago = sfConfig::get('app_gravatar_cache_expiration', '3 days');
 
